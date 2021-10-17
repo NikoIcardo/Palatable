@@ -1,30 +1,51 @@
 const express = require('express');
+const db = require('../db');
 const router = express.Router();
 
 // GET /api/v1/restaurants
 // Retrieve all restaurants
 
-router.get('/', (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      restaurants: ['McDonalds', 'Wendies'],
-    },
-  });
+router.get('/', async (req, res) => {
+  try {
+    const results = await db.query('select * from restaurants');
+
+    res.status(200).json({
+      status: 'success',
+      results: results.rows.length,
+      data: {
+        restaurants: results.rows,
+      },
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: 'Server Error. Failed to retrieve Resource.' });
+  }
 });
 
 // GET /api/v1/restaurants/:id
 // Retrieve individual restaurant
 
-router.get('/:id', (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      name: 'Taco Bell',
-      location: 'Detroit',
-      price_range: '5',
-    },
-  });
+router.get('/:id', async (req, res) => {
+  try {
+    const result = await db.query('select * from restaurants where id = $1', [
+      req.params.id,
+    ]);
+
+    if (!result.rows.length) {
+      res.status(500).json({
+        message: 'Restaurant does not exist.',
+        data: result,
+      });
+    }
+
+    res.status(200).json({
+      status: 'Successfully retrieved restaurant.',
+      data: result.rows[0],
+    });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to retrieve restaurant.' });
+  }
 });
 
 // POST /api/v1/restaurants/
