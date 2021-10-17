@@ -6,10 +6,12 @@ import RestaurantList from '../components/RestaurantList';
 
 class Home extends Component {
   render = () => (
-    <div className="container-fluid">
+    <div>
       <Header />
-      <AddRestaurant />
-      <RestaurantList />
+      <div className="container">
+        <AddRestaurant />
+        <RestaurantList />
+      </div>
     </div>
   );
 }
