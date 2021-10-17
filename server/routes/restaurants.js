@@ -28,20 +28,20 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const result = await db.query('select * from restaurants where id = $1', [
+    const results = await db.query('select * from restaurants where id = $1', [
       req.params.id,
     ]);
 
-    if (!result.rows.length) {
+    if (!results.rows.length) {
       res.status(500).json({
         message: 'Restaurant does not exist.',
-        data: result,
+        data: results,
       });
     }
 
     res.status(200).json({
       status: 'Successfully retrieved restaurant.',
-      data: result.rows[0],
+      data: results.rows[0],
     });
   } catch (err) {
     res.status(500).json({ message: 'Failed to retrieve restaurant.' });
@@ -51,21 +51,43 @@ router.get('/:id', async (req, res) => {
 // POST /api/v1/restaurants/
 // Create new restaurant
 
-router.post('/', (req, res) => {
-  res.status(200).json({
-    status: 'successfully added restaurant',
-    data: req.body,
-  });
+router.post('/', async (req, res) => {
+  const { name, location, price_range } = req.body;
+
+  try {
+    const results = await db.query(
+      'insert into restaurants (name, location, price_range) values ($1, $2, $3) returning *',
+      [name, location, price_range]
+    );
+
+    res.status(201).json({
+      message: 'Successfully added new restaurant entry',
+      data: results.rows[0],
+    });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to add restaurant.', data: err });
+  }
 });
 
 // update /api/v1/restaurants/:id
 // update a restaurant
 
-router.put('/:id', (req, res) => {
-  res.status(200).json({
-    status: 'successfully updated restaurant',
-    data: req.body,
-  });
+router.put('/:id', async (req, res) => {
+  const { name, location, price_range } = req.body;
+
+  try {
+    const results = await db.query(
+      'update restaurants set name = $1, location = $2, price_range = $3 where id = $4 returning *',
+      [name, location, price_range, req.params.id]
+    );
+
+    res.status(201).json({
+      message: 'Successfully updated restaurant!',
+      data: results.rows[0],
+    });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to Update Restaurant!' });
+  }
 });
 
 // DELETE /api/v1/restaurants/:id
