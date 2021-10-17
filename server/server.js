@@ -1,7 +1,12 @@
-require('dotenv').config();
 const express = require('express');
+const morgan = require('morgan');
+require('dotenv').config();
 
 const app = express();
+
+app.use(express.json());
+
+app.use('/api/v1/restaurants', require('./routes/restaurants'));
 
 const PORT = process.env.PORT || 5000;
 
