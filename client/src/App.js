@@ -8,7 +8,6 @@ import UpdateRestaurant from './routes/UpdateRestaurant';
 class App extends Component {
   render = () => (
     <div>
-      <div>App</div>
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
