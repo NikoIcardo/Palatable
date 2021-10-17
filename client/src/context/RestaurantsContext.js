@@ -18,6 +18,7 @@ class RestaurantContextProvider extends Component {
     <RestaurantContext.Provider
       value={{
         restaurants: this.state.restaurants,
+        setRestaurants: this.setRestaurants,
       }}
     >
       {this.props.children}

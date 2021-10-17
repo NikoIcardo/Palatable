@@ -11,7 +11,6 @@ class AddRestaurant extends Component {
               className="form-control"
               name=""
               placeholder="name"
-              onChange=""
             />
           </div>
           <div className="col-xs-12 col-sm mb-1">
@@ -20,7 +19,6 @@ class AddRestaurant extends Component {
               className="form-control"
               name=""
               placeholder="location"
-              onChange=""
             />
           </div>
           <div className="col-xs-12 col-sm mb-1">
@@ -29,7 +27,6 @@ class AddRestaurant extends Component {
               className="form-control mr-sm-2"
               name=""
               placeholder=""
-              onChange="location"
             >
               <option disabled>Price Range</option>
               <option value="1">$</option>

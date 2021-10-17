@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+import PalatableAPI from '../apis/PalatableAPI';
 
 class RestaurantList extends Component {
+  componentDidMount = async () => {
+    try {
+      const response = await PalatableAPI.get('/');
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render = () => (
     <div className="row">
       <div className="col mx-2 p-4 text-center">
-        <table class="table table-dark table-hover">
+        <table className="table table-dark table-hover">
           <thead>
             <tr className="bg-primary">
               <th scope="col">Restaurant</th>
