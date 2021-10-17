@@ -81,7 +81,7 @@ router.put('/:id', async (req, res) => {
       [name, location, price_range, req.params.id]
     );
 
-    res.status(201).json({
+    res.status(200).json({
       message: 'Successfully updated restaurant!',
       data: results.rows[0],
     });
@@ -93,10 +93,15 @@ router.put('/:id', async (req, res) => {
 // DELETE /api/v1/restaurants/:id
 // delete a restaurant
 
-router.delete('/:id', (req, res) => {
-  res.status(204).json({
-    status: 'successfully deleted restaurant',
-  });
+router.delete('/:id', async (req, res) => {
+  try {
+    await db.query('delete from restaurants where id = $1', [req.params.id]);
+    res.status(200).json({
+      message: 'Successfully Deleted Restaurant!',
+    });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to Delete Restaurant!' });
+  }
 });
 
 module.exports = router;
