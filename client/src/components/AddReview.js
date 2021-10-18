@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import PalatableAPI from '../apis/PalatableAPI';
 
 class AddReview extends Component {
   constructor(props) {
@@ -10,12 +12,21 @@ class AddReview extends Component {
     };
   }
 
+  addReview = async (e) => {
+    e.preventDefault();
+    const review = await PalatableAPI.post('/reviews', {
+      restaurant_id: this.props.match.params.id,
+      ...this.state,
+    });
+    this.props.addReview(review.data.data);
+  };
+
   render = () => (
     <div className="row">
       <div className="col mt-5">
         <h3>Add Your Review</h3>
         <hr />
-        <form>
+        <form onSubmit={this.addReview}>
           <div className="form-row">
             <div className="col-xs-12 col-sm-3 mb-4">
               <input
@@ -66,4 +77,4 @@ class AddReview extends Component {
   );
 }
 
-export default AddReview;
+export default withRouter(AddReview);

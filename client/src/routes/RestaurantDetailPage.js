@@ -38,6 +38,10 @@ class RestaurantDetailPage extends Component {
     }
   };
 
+  addReview = (review) => {
+    this.setState({ reviews: [...this.state.reviews, review] });
+  };
+
   render = () => (
     <div className="container-fluid">
       <div className="row jumbotron">
@@ -57,7 +61,7 @@ class RestaurantDetailPage extends Component {
             <Review review={review} key={review.id} />
           ))}
       </div>
-      <AddReview />
+      <AddReview addReview={this.addReview} />
     </div>
   );
 }
