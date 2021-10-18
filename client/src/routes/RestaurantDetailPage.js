@@ -29,10 +29,9 @@ class RestaurantDetailPage extends Component {
         reviews: results.data.data.reviews,
       });
 
-      this.state.reviews.forEach((review) =>
-        this.setState({ rating: this.state.rating + review.rating })
-      );
-      this.setState({ rating: this.state.rating / this.state.reviews.length });
+      this.setState({
+        rating: results.data.data.restaurant.average_rating,
+      });
     } catch (err) {
       console.log(err);
     }

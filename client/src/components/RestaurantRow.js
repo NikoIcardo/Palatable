@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import RestaurantContext from '../context/RestaurantsContext';
 import PalatableAPI from '../apis/PalatableAPI';
+import StarRating from './StarRating';
 
 class RestaurantRow extends Component {
   onDelete = async (e) => {
@@ -32,7 +33,10 @@ class RestaurantRow extends Component {
       <th scope="row">{this.props.restaurant.name}</th>
       <td>{this.props.restaurant.location}</td>
       <td>{'$'.repeat(this.props.restaurant.price_range)}</td>
-      <td>Ratings</td>
+      <td>
+        <StarRating rating={this.props.restaurant.average_rating} /> (
+        {this.props.restaurant.count ? this.props.restaurant.count : 0})
+      </td>
       <td>
         <button className="btn btn-warning" onClick={(e) => this.onEdit(e)}>
           Edit
