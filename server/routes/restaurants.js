@@ -78,6 +78,25 @@ router.post('/', async (req, res) => {
   }
 });
 
+//Post /api/v1/restaurants/reviews
+//Create New Review
+router.post('/reviews', async (req, res) => {
+  console.log(req.body);
+  const { restaurant_id, name, review, rating } = req.body;
+  try {
+    const result = await db.query(
+      'insert into reviews (restaurant_id, name, review, rating) values ($1, $2, $3, $4) returning *',
+      [restaurant_id, name, review, rating]
+    );
+
+    res
+      .status(201)
+      .json({ message: 'Successfully Added Review.', data: result.rows[0] });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 // update /api/v1/restaurants/:id
 // update a restaurant
 
