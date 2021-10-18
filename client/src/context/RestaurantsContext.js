@@ -10,7 +10,7 @@ export class RestaurantProvider extends Component {
     };
   }
 
-  setRestaurants = (newRestaurants = ['']) => {
+  setRestaurants = (newRestaurants) => {
     this.setState({ restaurants: newRestaurants });
   };
 

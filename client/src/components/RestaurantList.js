@@ -30,7 +30,7 @@ class RestaurantList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.context.restaurants.length > 0 &&
+            {this.context.restaurants &&
               this.context.restaurants.map((restaurant) => (
                 <RestaurantRow restaurant={restaurant} key={restaurant.id} />
               ))}
