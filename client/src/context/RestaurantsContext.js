@@ -1,8 +1,8 @@
 import React, { Component, createContext } from 'react';
 
-export const RestaurantContext = createContext();
+const RestaurantContext = createContext();
 
-class RestaurantContextProvider extends Component {
+export class RestaurantProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ class RestaurantContextProvider extends Component {
     };
   }
 
-  setRestaurants = (newRestaurants) => {
+  setRestaurants = (newRestaurants = ['']) => {
     this.setState({ restaurants: newRestaurants });
   };
 
@@ -26,4 +26,4 @@ class RestaurantContextProvider extends Component {
   );
 }
 
-export default RestaurantContextProvider;
+export default RestaurantContext;

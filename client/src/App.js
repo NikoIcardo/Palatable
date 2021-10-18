@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './routes/Home';
 import RestaurantDetailPage from './routes/RestaurantDetailPage';
 import UpdateRestaurant from './routes/UpdateRestaurant';
-import RestaurantContextProvider from './context/RestaurantsContext';
+import {
+  RestaurantProvider,
+} from './context/RestaurantsContext';
 
 class App extends Component {
   render = () => (
-    <RestaurantContextProvider>
+    <RestaurantProvider>
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -24,7 +26,7 @@ class App extends Component {
           />
         </Switch>
       </Router>
-    </RestaurantContextProvider>
+    </RestaurantProvider>
   );
 }
 

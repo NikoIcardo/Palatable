@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import PalatableAPI from '../apis/PalatableAPI';
 
+import RestaurantContext from '../context/RestaurantsContext';
+import RestaurantRow from './RestaurantRow';
+
 class RestaurantList extends Component {
   componentDidMount = async () => {
     try {
-      const response = await PalatableAPI.get('/');
-      console.log(response);
+      const results = await PalatableAPI.get('/');
+      console.log(results);
+      this.context.setRestaurants(results.data.data.restaurants);
     } catch (err) {
       console.log(err);
     }
@@ -26,47 +30,17 @@ class RestaurantList extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>
-                <button className="btn btn-warning">Edit</button>
-              </td>
-              <td>
-                <button className="btn btn-danger">Edit</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>
-                <button className="btn btn-warning">Edit</button>
-              </td>
-              <td>
-                <button className="btn btn-danger">Edit</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>
-                <button className="btn btn-warning">Edit</button>
-              </td>
-              <td>
-                <button className="btn btn-danger">Edit</button>
-              </td>
-            </tr>
+            {this.context.restaurants.length > 0 &&
+              this.context.restaurants.map((restaurant) => (
+                <RestaurantRow restaurant={restaurant} key={restaurant.id} />
+              ))}
           </tbody>
         </table>
       </div>
     </div>
   );
 }
+
+RestaurantList.contextType = RestaurantContext;
 
 export default RestaurantList;
