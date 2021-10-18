@@ -47,7 +47,7 @@ class RestaurantDetailPage extends Component {
         <div className="col-10 offset-1">
           <h4 className="display-4">{this.state.location}</h4>
           <h2 className="mb-5 mx-0 display-1">{this.state.name}</h2>
-          {this.state.rating !== 0 ? (
+          {this.state.rating ? (
             <StarRating rating={this.state.rating} />
           ) : (
             <p>No Reviews</p>

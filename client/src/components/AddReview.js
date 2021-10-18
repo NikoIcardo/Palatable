@@ -19,6 +19,12 @@ class AddReview extends Component {
       ...this.state,
     });
     this.props.addReview(review.data.data);
+    this.setState({
+      name: '',
+      review: '',
+      rating: 'Your Rating',
+    });
+    this.props.history.push(`/restaurants/${this.props.match.params.id}`);
   };
 
   render = () => (

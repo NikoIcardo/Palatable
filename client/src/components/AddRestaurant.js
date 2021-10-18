@@ -21,6 +21,11 @@ class AddRestaurant extends Component {
         ...this.context.restaurants,
         result.data.data,
       ]);
+      this.setState({
+        name: '',
+        location: '',
+        price_range: 'Price Range',
+      });
     } catch (err) {
       console.log(err);
     }

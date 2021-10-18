@@ -3,7 +3,7 @@ import StarRating from './StarRating';
 
 class Review extends Component {
   render = () => (
-    <div className="col-4">
+    <div className="col-4 mt-2">
       <div
         className="card text-white bg-dark mb-3 mr-4"
         style={{ height: '100%' }}
