@@ -28,9 +28,10 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const results = await db.query('select * from restaurants where id = $1', [
-      req.params.id,
-    ]);
+    const restaurant = await db.query(
+      'select * from restaurants where id = $1',
+      [req.params.id]
+    );
 
     if (!results.rows.length) {
       res.status(500).json({
@@ -39,9 +40,17 @@ router.get('/:id', async (req, res) => {
       });
     }
 
+    const reviews = await db.query(
+      'select * from reviews where restaurant_id = $1',
+      [req.params.id]
+    );
+
     res.status(200).json({
       status: 'Successfully retrieved restaurant.',
-      data: results.rows[0],
+      data: {
+        restaurant: restaurant.rows[0],
+        reviews: reviews.rows[0],
+      },
     });
   } catch (err) {
     res.status(500).json({ message: 'Failed to retrieve restaurant.' });

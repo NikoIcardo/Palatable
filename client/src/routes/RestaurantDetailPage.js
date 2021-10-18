@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PalatableAPI from '../apis/PalatableAPI';
+import Reviews from '../components/Reviews';
+import StarRating from '../components/StarRating';
+import AddReview from '../components/AddReview';
 
 class RestaurantDetailPage extends Component {
   constructor(props) {
@@ -27,9 +30,12 @@ class RestaurantDetailPage extends Component {
       <div className="row jumbotron">
         <div className="col-10 offset-1">
           <h4 className="display-4">{this.state.location}</h4>
-          <h2 className="mb-5 display-1">{this.state.name}</h2>
+          <h2 className="mb-5 mx-0 display-1">{this.state.name}</h2>
+          <StarRating rating={3.5} />
         </div>
       </div>
+      <Reviews />
+      <AddReview />
     </div>
   );
 }
