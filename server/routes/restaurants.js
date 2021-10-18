@@ -33,10 +33,10 @@ router.get('/:id', async (req, res) => {
       [req.params.id]
     );
 
-    if (!results.rows.length) {
+    if (!restaurant.rows.length) {
       res.status(500).json({
         message: 'Restaurant does not exist.',
-        data: results,
+        data: restaurant,
       });
     }
 
@@ -49,7 +49,7 @@ router.get('/:id', async (req, res) => {
       status: 'Successfully retrieved restaurant.',
       data: {
         restaurant: restaurant.rows[0],
-        reviews: reviews.rows[0],
+        reviews: reviews.rows,
       },
     });
   } catch (err) {

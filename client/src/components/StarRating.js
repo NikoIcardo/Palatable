@@ -10,15 +10,15 @@ class StarRating extends Component {
   componentDidMount = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (i < this.props.rating) {
-        stars.push(<i className="fas fa-star"></i>);
+      if (i < Math.floor(this.props.rating)) {
+        stars.push(<i className="fas fa-star" key={i}></i>);
       } else if (
-        i === Math.ceil(this.props.rating) &&
+        i === Math.floor(this.props.rating) &&
         !Number.isInteger(this.props.rating)
       ) {
-        stars.push(<i className="fas fa-star-half-alt"></i>);
+        stars.push(<i className="fas fa-star-half-alt" key={i}></i>);
       } else {
-        stars.push(<i className="far fa-star"></i>);
+        stars.push(<i className="far fa-star" key={i}></i>);
       }
     }
     this.setState({ stars });

@@ -17,7 +17,7 @@ class UpdateRestaurant extends Component {
     try {
       const response = await PalatableAPI.get(`/${this.props.match.params.id}`);
       console.log(response);
-      const { name, location, price_range } = response.data.data;
+      const { name, location, price_range } = response.data.data.restaurant;
       this.setState({ name, location, price_range });
     } catch (err) {
       console.log(err);
