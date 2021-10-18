@@ -19,7 +19,7 @@ class App extends Component {
           />
           <Route
             exact
-            path="/restaurants/:id"
+            path="/Restaurants/:id"
             component={RestaurantDetailPage}
           />
         </Switch>

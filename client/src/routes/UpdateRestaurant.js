@@ -24,9 +24,14 @@ class UpdateRestaurant extends Component {
     }
   };
 
-  update = () => {
-    PalatableAPI.put(`/${this.context.updateId}`, this.state);
-    this.props.history.push('/');
+  update = async (e) => {
+    e.preventDefault();
+    try {
+      await PalatableAPI.put(`/${this.props.match.params.id}`, this.state);
+      this.props.history.push('/');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render = () => (

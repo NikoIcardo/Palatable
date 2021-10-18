@@ -4,7 +4,8 @@ import RestaurantContext from '../context/RestaurantsContext';
 import PalatableAPI from '../apis/PalatableAPI';
 
 class RestaurantRow extends Component {
-  onDelete = async () => {
+  onDelete = async (e) => {
+    e.stopPropagation();
     try {
       await PalatableAPI.delete(`/${this.props.restaurant.id}`);
       this.context.setRestaurants(
@@ -17,23 +18,28 @@ class RestaurantRow extends Component {
     }
   };
 
-  onEdit = () => {
+  onEdit = (e) => {
+    e.stopPropagation();
     this.props.history.push(`/restaurants/${this.props.restaurant.id}/update`);
   };
 
+  details = () => {
+    this.props.history.push(`/restaurants/${this.props.restaurant.id}`);
+  };
+
   render = () => (
-    <tr>
+    <tr onClick={this.details}>
       <th scope="row">{this.props.restaurant.name}</th>
       <td>{this.props.restaurant.location}</td>
       <td>{'$'.repeat(this.props.restaurant.price_range)}</td>
       <td>Ratings</td>
       <td>
-        <button className="btn btn-warning" onClick={this.onEdit}>
+        <button className="btn btn-warning" onClick={(e) => this.onEdit(e)}>
           Edit
         </button>
       </td>
       <td>
-        <button className="btn btn-danger" onClick={this.onDelete}>
+        <button className="btn btn-danger" onClick={(e) => this.onDelete(e)}>
           Delete
         </button>
       </td>
