@@ -14,7 +14,7 @@ class AddReview extends Component {
 
   addReview = async (e) => {
     e.preventDefault();
-    const review = await PalatableAPI.post('/reviews', {
+    const review = await PalatableAPI.post('/api/v1/restaurants/reviews', {
       restaurant_id: this.props.match.params.id,
       ...this.state,
     });

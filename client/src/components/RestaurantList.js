@@ -7,7 +7,7 @@ import RestaurantRow from './RestaurantRow';
 class RestaurantList extends Component {
   componentDidMount = async () => {
     try {
-      const results = await PalatableAPI.get('/');
+      const results = await PalatableAPI.get('/api/v1/restaurants/');
       console.log(results);
       this.context.setRestaurants(results.data.data.restaurants);
     } catch (err) {

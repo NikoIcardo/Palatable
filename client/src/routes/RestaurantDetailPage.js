@@ -19,7 +19,9 @@ class RestaurantDetailPage extends Component {
 
   componentDidMount = async () => {
     try {
-      const results = await PalatableAPI.get(`/${this.props.match.params.id}`);
+      const results = await PalatableAPI.get(
+        `/api/v1/restaurants/${this.props.match.params.id}`
+      );
       console.log(results);
       const { name, location, price_range } = results.data.data.restaurant;
       this.setState({
