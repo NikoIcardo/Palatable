@@ -15,9 +15,7 @@ class UpdateRestaurant extends Component {
 
   componentDidMount = async () => {
     try {
-      const response = await PalatableAPI.get(
-        `/api/v1/restaurants/${this.props.match.params.id}`
-      );
+      const response = await PalatableAPI.get(`/${this.props.match.params.id}`);
       console.log(response);
       const { name, location, price_range } = response.data.data.restaurant;
       this.setState({ name, location, price_range });
@@ -29,10 +27,7 @@ class UpdateRestaurant extends Component {
   update = async (e) => {
     e.preventDefault();
     try {
-      await PalatableAPI.put(
-        `/api/v1/restaurants/${this.props.match.params.id}`,
-        this.state
-      );
+      await PalatableAPI.put(`/${this.props.match.params.id}`, this.state);
       this.props.history.push('/');
     } catch (err) {
       console.log(err);

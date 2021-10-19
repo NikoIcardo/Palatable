@@ -15,10 +15,7 @@ class AddRestaurant extends Component {
   submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const result = await PalatableAPI.post(
-        '/api/v1/restaurants/',
-        this.state
-      );
+      const result = await PalatableAPI.post('/', this.state);
       console.log(result);
       this.context.setRestaurants([
         ...this.context.restaurants,

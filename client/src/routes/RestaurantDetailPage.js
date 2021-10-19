@@ -17,11 +17,9 @@ class RestaurantDetailPage extends Component {
     };
   }
 
-  componentDidMount = async () => {
+  loadRestaurant = async () => {
     try {
-      const results = await PalatableAPI.get(
-        `/api/v1/restaurants/${this.props.match.params.id}`
-      );
+      const results = await PalatableAPI.get(`/${this.props.match.params.id}`);
       console.log(results);
       const { name, location, price_range } = results.data.data.restaurant;
       this.setState({
@@ -39,8 +37,12 @@ class RestaurantDetailPage extends Component {
     }
   };
 
+  componentDidMount = async () => {
+    this.loadRestaurant();
+  };
+
   addReview = (review) => {
-    this.setState({ reviews: [...this.state.reviews, review] });
+    this.loadRestaurant();
   };
 
   render = () => (

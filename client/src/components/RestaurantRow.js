@@ -8,9 +8,7 @@ class RestaurantRow extends Component {
   onDelete = async (e) => {
     e.stopPropagation();
     try {
-      await PalatableAPI.delete(
-        `/api/v1/restaurants/${this.props.restaurant.id}`
-      );
+      await PalatableAPI.delete(`/${this.props.restaurant.id}`);
       this.context.setRestaurants(
         this.context.restaurants.filter(
           (restaurant) => restaurant.id !== this.props.restaurant.id
